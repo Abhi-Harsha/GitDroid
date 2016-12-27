@@ -1,0 +1,55 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.abhishek.gitdriod.Fragments.RepoDetailsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="Alamofire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/repoNameTextView"
+            android:layout_marginTop="30dp"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/repoDescriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/repoNameTextView"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:text="Networking library commonly used for iOS apps"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/watcherLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/repoDescriptionTextView"
+            android:text="Watchers :"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/watchersNumberTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/watcherLabelTextView"
+            android:text="100"
+            android:layout_below="@+id/repoDescriptionTextView"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="10dp"/>
+    </RelativeLayout>
+</FrameLayout>
