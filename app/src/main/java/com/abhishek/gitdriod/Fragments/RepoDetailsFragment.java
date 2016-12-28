@@ -7,8 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.abhishek.gitdriod.R;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +22,15 @@ import com.abhishek.gitdriod.R;
  * create an instance of this fragment.
  */
 public class RepoDetailsFragment extends Fragment {
+
+    private TextView repoNameTextView;
+    private TextView repoDescriptionTextView;
+    private TextView watcherLabelTextView;
+    private TextView watcherNumberTextView;
+    private TextView forkLabelTextView;
+    private TextView forkNumberTextView;
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -65,7 +77,15 @@ public class RepoDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_repo_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_repo_details, container, false);
+        repoNameTextView = (TextView)view.findViewById(R.id.repoNameTextView);
+        repoDescriptionTextView = (TextView)view.findViewById(R.id.repoDescriptionTextView);
+        watcherLabelTextView = (TextView)view.findViewById(R.id.watcherLabelTextView);
+        watcherNumberTextView = (TextView)view.findViewById(R.id.watchersNumberTextView);
+        forkLabelTextView = (TextView)view.findViewById(R.id.forkLabelTextView);
+        forkNumberTextView = (TextView)view.findViewById(R.id.forksNumberTextView);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

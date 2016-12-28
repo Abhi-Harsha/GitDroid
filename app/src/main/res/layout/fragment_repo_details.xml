@@ -37,16 +37,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/repoDescriptionTextView"
-            android:text="Watchers :"
+            android:text="Watchers"
             android:layout_marginTop="20dp"
             android:textSize="20dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="50dp"/>
 
         <TextView
             android:id="@+id/watchersNumberTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/watcherLabelTextView"
+            android:text="100"
+            android:layout_below="@+id/repoDescriptionTextView"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/forkLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forks"
+            android:textSize="20dp"
+            android:layout_below="@+id/repoDescriptionTextView"
+            android:layout_toRightOf="@+id/watchersNumberTextView"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"/>
+
+        <TextView
+            android:id="@+id/forksNumberTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/forkLabelTextView"
             android:text="100"
             android:layout_below="@+id/repoDescriptionTextView"
             android:layout_marginTop="24dp"
