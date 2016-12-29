@@ -38,10 +38,6 @@
 
     </RelativeLayout>
 
-    <FrameLayout android:name="com.abhishek.gitdriod.Fragments.RepoDetailsFragment"
-        android:id="@+id/repoDetailsFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout="@layout/fragment_repo_details" />
+
 
 </LinearLayout>

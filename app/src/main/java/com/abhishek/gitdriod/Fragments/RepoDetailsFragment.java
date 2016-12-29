@@ -4,11 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.abhishek.gitdriod.Model.GitHubRepositoriesResponseBody;
 import com.abhishek.gitdriod.R;
 
 import org.w3c.dom.Text;
@@ -33,44 +35,47 @@ public class RepoDetailsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "com.repo.info";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private GitHubRepositoriesResponseBody _repository;
 
     private OnFragmentInteractionListener mListener;
 
     public RepoDetailsFragment() {
-        // Required empty public constructor
+
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     *
      * @return A new instance of fragment RepoDetailsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static RepoDetailsFragment newInstance(String param1, String param2) {
+    public static RepoDetailsFragment newInstance(GitHubRepositoriesResponseBody repository) {
         RepoDetailsFragment fragment = new RepoDetailsFragment();
+        fragment.setRepositoryDetails(repository);
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM1, "some string");
         fragment.setArguments(args);
         return fragment;
+    }
+
+    private void setRepositoryDetails(GitHubRepositoriesResponseBody repository) {
+        this._repository = repository;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+//        if (getArguments() != null) {
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            //mParam2 = getArguments().getString(ARG_PARAM2);
+//        }
     }
 
     @Override
@@ -84,6 +89,15 @@ public class RepoDetailsFragment extends Fragment {
         watcherNumberTextView = (TextView)view.findViewById(R.id.watchersNumberTextView);
         forkLabelTextView = (TextView)view.findViewById(R.id.forkLabelTextView);
         forkNumberTextView = (TextView)view.findViewById(R.id.forksNumberTextView);
+
+        repoNameTextView.setText(_repository.getName());
+        repoDescriptionTextView.setText(_repository.getDescription());
+        if (_repository.getWatchers() != null) {
+            watcherNumberTextView.setText(String.valueOf(_repository.getWatchers()));
+        }
+        if(_repository.getFork() != null) {
+            forkNumberTextView.setText(String.valueOf(_repository.getForks()));
+        }
 
         return view;
     }

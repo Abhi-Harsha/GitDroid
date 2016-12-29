@@ -90,7 +90,7 @@ public class RepositoryDetailsActivity extends AppCompatActivity implements  Rep
                             .show();
                 } else {
 
-                    recyclerView.setAdapter(new RepoAdapter(repos, R.layout.repo_row_item, RepositoryDetailsActivity.this));
+                    recyclerView.setAdapter(new RepoAdapter(repos, R.layout.repo_row_item, RepositoryDetailsActivity.this, recyclerView));
                     personTextView.setText(repos.get(0).getName());
                     Picasso.with(getApplicationContext()).load(repos.get(0).getOwner().getAvatarUrl()).into(userImageView);
                 }

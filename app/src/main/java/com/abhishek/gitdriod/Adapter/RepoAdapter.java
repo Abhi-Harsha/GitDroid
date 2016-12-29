@@ -5,6 +5,7 @@ import android.graphics.Movie;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +36,8 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ReportAdapterV
 
     public static List<GitHubRepositoriesResponseBody> reposList;
     private int rowNumber;
-    private static Context context;
-    RelativeLayout layoutGlobal;
+    private  Context context;
+    RecyclerView recyclerView;
 
 
 
@@ -47,13 +48,14 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ReportAdapterV
     }
 
     @Override
-    public void onBindViewHolder(ReportAdapterViewHolder holder, int position) {
+    public void onBindViewHolder(final ReportAdapterViewHolder holder, final int position) {
             holder.repoNameTextView.setText(reposList.get(position).getName());
             holder.repoLanguageTextView.setText(reposList.get(position).getLanguage());
             holder.layout.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    showRepoDetailsFragment();
+
+                    showRepoDetailsFragment(position);
                 }
             });
     }
@@ -63,8 +65,16 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ReportAdapterV
         return reposList.size();
     }
 
-    public void showRepoDetailsFragment() {
+    public void showRepoDetailsFragment(int pos) {
+        RepositoryDetailsActivity activity= (RepositoryDetailsActivity) context;
+        FragmentManager manager = activity.getSupportFragmentManager();
+        RepoDetailsFragment fragment = (RepoDetailsFragment) manager.findFragmentById(R.id.repoContainerLayout);
 
+        if(fragment == null) {
+            fragment = RepoDetailsFragment.newInstance(reposList.get(pos));
+            recyclerView.setVisibility(RecyclerView.GONE);
+            manager.beginTransaction().add(R.id.repoContainerLayout, fragment).addToBackStack(null).commit();
+        }
     }
 
 
@@ -81,16 +91,16 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ReportAdapterV
             layout = (RelativeLayout)v.findViewById(R.id.layout);
             repoNameTextView = (TextView)v.findViewById(R.id.repoNameTextView);
             repoLanguageTextView = (TextView)v.findViewById(R.id.languageTextView);
-            repoNameTextView.setOnClickListener(new RelativeLayout.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    RepositoryDetailsActivity activity= (RepositoryDetailsActivity) context;
-                    FragmentManager manager = activity.getSupportFragmentManager();
-                    Fragment fragment; //= manager.findFragmentById(R.id.repoDetailsFragment);
-                    fragment = new RepoDetailsFragment();
-                    manager.beginTransaction().add(R.id.repoDetailsFragment, fragment);
-                }
-            });
+//            repoNameTextView.setOnClickListener(new RelativeLayout.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    RepositoryDetailsActivity activity= (RepositoryDetailsActivity) context;
+//                    FragmentManager manager = activity.getSupportFragmentManager();
+//                    Fragment fragment; //= manager.findFragmentById(R.id.repoDetailsFragment);
+//                    fragment = new RepoDetailsFragment();
+//                    manager.beginTransaction().add(R.id.repoDetailsFragment, fragment);
+//                }
+//            });
 
 
 
@@ -108,10 +118,11 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ReportAdapterV
 
     }
 
-    public RepoAdapter(List<GitHubRepositoriesResponseBody> repos, int rowNumber, Context context) {
+    public RepoAdapter(List<GitHubRepositoriesResponseBody> repos, int rowNumber, Context context, RecyclerView recyclerView) {
             this.reposList = repos;
             this.rowNumber = rowNumber;
             this.context = context;
+            this.recyclerView = recyclerView;
     }
 
 
